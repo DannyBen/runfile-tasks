@@ -60,7 +60,7 @@ require 'runfile-tasks/testing'
 
 Commands Added:
 
-- `run spec [<name>]` - Run all specs or a single spec file matching a regex.
+- `run spec [NAME]` - Run all specs or a single spec file matching a regex.
 
 ```ruby
 # Runfile
@@ -85,7 +85,7 @@ RunfileTasks::rspec action: 'spec',
 
 Commands Added:
 
-- "test [<name>]" - Run all tests or a single test file.
+- "test [NAME]" - Run all tests or a single test file.
 
 ```ruby
 # Runfile
@@ -128,7 +128,7 @@ Commands Added:
    (--remote).
 - `publish` - Publish gem to rubygems. Make sure to 'run gem build' before 
    you publish.
-- `yank [<version>]` - Yank gem from rubygems.
+- `yank [VERSION]` - Yank gem from rubygems.
 
 
 ```ruby
@@ -147,7 +147,7 @@ RunfileTasks::RubyGems.all 'my-gem', 'gems'
 
 Commands Added:
 
-- `rdoc [-- <options>...]` - Generate documentation using the rdoc command 
+- `rdoc [-- OPTIONS...]` - Generate documentation using the rdoc command 
   line tool. To pass arguments to rdoc, place them after '--'.
 
 
