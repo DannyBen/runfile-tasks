@@ -18,6 +18,11 @@ Or pick and choose from the various task categories:
 	require 'runfile-tasks/testing'
 
 
+Requiring the task packs does not make the available in your Runfile 
+immediately. You need to activate any of the tasks you want as described 
+below.
+
+
 ## Usage
 
 Include any of the tasks you need in your Runfile like this:
@@ -43,8 +48,122 @@ end
 
 ## Task Index
 
-SOON.  
-For now, here is a [random cat].
+### Testing Tasks
+
+Including all testing tasks:
+
+```ruby
+require 'runfile-tasks/testing'
+```
+
+#### Testing with RSpec
+
+Commands Added:
+
+- `run spec [<name>]` - Run all specs or a single spec file matching a regex.
+
+```ruby
+# Runfile
+
+# Only include the rspec tasks
+require 'runfile-tasks/testing/rspec'
+
+# Include the rspec tasks with default configuration
+RunfileTasks::Testing.rspec
+
+# Set the Runfile action to 'test' instead of the default 'spec'
+RunfileTasks::Testing.rspec 'test'
+
+# Change the default options with a hash (these are the defaults)
+RunfileTasks::rspec action: 'spec', 
+  pattern: './spec/**/*_spec.rb', command: 'rspec'
+
+```
+
+
+#### Testing with Minitest
+
+Commands Added:
+
+- "test [<name>]" - Run all tests or a single test file.
+
+```ruby
+# Runfile
+
+# Only include the minitest tasks
+require 'runfile-tasks/testing/minitest'
+
+# Include the minitest tasks with default configuration
+RunfileTasks::Testing.minitest
+
+# Set the file pattern to look for (this is the default)
+RunfileTasks::Testing.rspec './test/*_test.rb'
+
+```
+
+#### Testing with Cucumber
+
+Commands Added:
+
+- `(feature|features) [current]` - Run cucumber feature tests
+
+```ruby
+# Runfile
+
+# Only include the minitest tasks
+require 'runfile-tasks/testing/cucumber'
+
+# Include the cucumber tasks with default configuration
+RunfileTasks::Testing.cucumber
+```
+
+
+### Gem Authoring Tasks
+
+Commands Added:
+
+- `build [--install]` - Build gem from gemspec and move it to 'gems' folder. 
+   Use --install to also install it.
+- `install [--remote]` - Install gem from local gem file or from rubygems 
+   (--remote).
+- `publish` - Publish gem to rubygems. Make sure to 'run gem build' before 
+   you publish.
+- `yank [<version>]` - Yank gem from rubygems.
+
+
+```ruby
+# Runfile
+require 'runfile-tasks/rubygems'
+
+# Include the tasks with default configuration. Pass in your gem name.
+RunfileTasks::RubyGems.all 'my-gem'
+
+# Set the folder where gems are copied after they are built (default)
+RunfileTasks::RubyGems.all 'my-gem', 'gems'
+```
+
+
+### Documentation Tasks
+
+Commands Added:
+
+- `rdoc [-- <options>...]` - Generate documentation using the rdoc command 
+  line tool. To pass arguments to rdoc, place them after '--'.
+
+
+```ruby
+# Runfile
+require 'runfile-tasks/docs'
+
+# Include the tasks with default configuration.
+RunfileTasks::Docs.rdoc
+
+# Set the files to be considered (default below)
+RunfileTasks::Docs.rdoc '**/*.{rb,md}'
+
+# Pass any additional option directly to rdoc (defaults below)
+RunfileTasks::Docs.rdoc '**/*.{rb,md}', ["--main README.md", "--all",]
+```
 
 
 ---
