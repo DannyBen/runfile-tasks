@@ -20,12 +20,24 @@ Or pick and choose from the various task categories:
 
 ## Usage
 
-Include any of the tasks you need with:
+Include any of the tasks you need in your Runfile like this:
 
 ```ruby
-RunfileTasks::RubyGems.all 'runfile-tasks'
-RunfileTasks::Testing.cucumber
+require 'runfile-tasks'
+
+name    "Greeter"
+summary "A sample Runfile"
+version "0.1.0"
+
+# Include rdoc tasks and rspec tasks
 RunfileTasks::Docs.rdoc
+RunfileTasks::Testing.rspec
+
+# The rest of your Runfile goes here
+action :hello do
+  puts "world"
+end
+
 ```
 
 
