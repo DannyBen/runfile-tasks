@@ -85,7 +85,7 @@ RunfileTasks::rspec action: 'spec',
 
 Commands Added:
 
-- "test [NAME]" - Run all tests or a single test file.
+- `test [NAME]` - Run all tests or a single test file.
 
 ```ruby
 # Runfile
