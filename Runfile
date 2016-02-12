@@ -1,0 +1,11 @@
+require "yaml"
+require "runfile-tasks"
+
+name    "Runfile Tasks Runfile"
+summary "Runfile tasks for gem developers"
+version RunfileTasks::VERSION
+
+RunfileTasks::RubyGems.all 'runfile-tasks'
+RunfileTasks::Testing.cucumber
+RunfileTasks::Docs.rdoc
+
