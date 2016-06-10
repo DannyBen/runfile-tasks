@@ -22,7 +22,7 @@ module RunfileTasks
         files = Dir["*.gem"]
         Dir.exist? gemdir or FileUtils.mkdir gemdir
         files.each {|f| FileUtils.mv f, gemdir }
-        args['--install'] and call "gem install"
+        args['--install'] and execute "gem install"
       end
 
       usage  "install [--remote]"
