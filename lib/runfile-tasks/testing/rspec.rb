@@ -11,8 +11,8 @@ module RunfileTasks
         command: 'rspec'
       }.merge opts
 
-      usage  "#{opts[:action]} [<name>]"
-      help   "Run all specs or a single spec file matching a regex."
+      usage  "#{opts[:action]} [<name>] [<tag>]"
+      help   "Run all specs or a single spec file matching a regex. You can provide a tag to run only specific tests."
       action opts[:action].to_sym do |args|
         if args['<name>'] 
           files = Dir[opts[:pattern]]  
@@ -23,6 +23,7 @@ module RunfileTasks
         else
           cmd = "#{opts[:command]}"
         end
+        cmd = "#{cmd} --tag #{args['<tag>']}" if args['<tag>']
         say "!txtgrn!Running: !txtpur!#{cmd}"
         system cmd
       end
