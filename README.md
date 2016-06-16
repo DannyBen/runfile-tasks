@@ -1,21 +1,28 @@
 Runfile Tasks
-=============
+==================================================
 
 A library of tasks ready to be included in your [Runfile]
 
-## Install
+Install
+--------------------------------------------------
 
 Install the gem or require it in your Gemfile:
 
-	gem 'runfile-tasks'
+```ruby
+gem 'runfile-tasks'
+```
 
 In your Runfile, you can include either all tasks:
 
-	require 'runfile-tasks'
+```ruby
+require 'runfile-tasks'
+```
 
 Or pick and choose from the various task categories:
 
-	require 'runfile-tasks/testing'
+```ruby
+require 'runfile-tasks/testing'
+```
 
 
 Requiring the task packs does not make the available in your Runfile 
@@ -23,7 +30,9 @@ immediately. You need to activate any of the tasks you want as described
 below.
 
 
-## Usage
+Usage
+--------------------------------------------------
+
 
 Include any of the tasks you need in your Runfile like this:
 
@@ -46,7 +55,8 @@ end
 ```
 
 
-## Task Index
+Task Index
+--------------------------------------------------
 
 ### Testing Tasks
 
@@ -60,7 +70,8 @@ require 'runfile-tasks/testing'
 
 Commands Added:
 
-- `run spec [NAME]` - Run all specs or a single spec file matching a regex.
+- `run spec [NAME] [TAG]` - Run all specs, a single spec file, or all specs 
+  matching a tag.
 
 ```ruby
 # Runfile
