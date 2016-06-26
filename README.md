@@ -123,7 +123,7 @@ require 'runfile-tasks/testing/cucumber'
 RunfileTasks::Testing.cucumber
 
 # Include the step definitions markdown generator
-RunfileTasks::Testing.cucumber_docs
+RunfileTasks::Testing.cucumber_stepdefs
 ```
 
 

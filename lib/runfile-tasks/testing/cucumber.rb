@@ -21,7 +21,7 @@ module RunfileTasks
       end
     end
 
-    def cucumber_docs(filename='stepdefs.md')
+    def cucumber_stepdefs(filename='stepdefs.md')
       usage  "stepdefs"
       help   "Generate step definitions markdown document.\n" +
              "Comments in the step definition file that start with two or " +
