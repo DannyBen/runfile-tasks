@@ -60,7 +60,7 @@ Task Index
 
 ### Testing Tasks
 
-Including all testing tasks:
+Require all testing tasks:
 
 ```ruby
 require 'runfile-tasks/testing'
@@ -74,9 +74,7 @@ Commands Added:
   matching a tag.
 
 ```ruby
-# Runfile
-
-# Only include the rspec tasks
+# Only require the rspec tasks
 require 'runfile-tasks/testing/rspec'
 
 # Include the rspec tasks with default configuration
@@ -99,16 +97,14 @@ Commands Added:
 - `test [NAME]` - Run all tests or a single test file.
 
 ```ruby
-# Runfile
-
-# Only include the minitest tasks
+# Only require the minitest tasks
 require 'runfile-tasks/testing/minitest'
 
 # Include the minitest tasks with default configuration
 RunfileTasks::Testing.minitest
 
 # Set the file pattern to look for (this is the default)
-RunfileTasks::Testing.rspec './test/*_test.rb'
+RunfileTasks::Testing.minitest './test/*_test.rb'
 
 ```
 
@@ -116,16 +112,18 @@ RunfileTasks::Testing.rspec './test/*_test.rb'
 
 Commands Added:
 
-- `(feature|features) [current]` - Run cucumber feature tests
+- `(feature|features) [<tag_or_file>]` - Run cucumber feature tests
+- `stepdefs` - Generate a markdown document from the step definitions
 
 ```ruby
-# Runfile
-
-# Only include the minitest tasks
+# Only require the cucumber tasks
 require 'runfile-tasks/testing/cucumber'
 
 # Include the cucumber tasks with default configuration
 RunfileTasks::Testing.cucumber
+
+# Include the step definitions markdown generator
+RunfileTasks::Testing.cucumber_docs
 ```
 
 
@@ -143,7 +141,6 @@ Commands Added:
 
 
 ```ruby
-# Runfile
 require 'runfile-tasks/rubygems'
 
 # Include the tasks with default configuration. Pass in your gem name.
@@ -163,7 +160,6 @@ Commands Added:
 
 
 ```ruby
-# Runfile
 require 'runfile-tasks/docs'
 
 # Include the tasks with default configuration.
