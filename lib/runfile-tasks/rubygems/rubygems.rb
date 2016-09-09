@@ -10,11 +10,9 @@ module RunfileTasks
     end
 
     def build(gemname, gemdir="gems")
-      command "gem"
+      gemver = get_gemver gemname
 
-      spec = Gem::Specification::load "#{gemname}.gemspec"
-      spec or abort "Error loading #{gemname}.gemspec"
-      gemver = spec.version.to_s
+      command "gem"
 
       usage  "build [--install]"
       help   "Build gem from gemspec and move it to '#{gemdir}' folder.\nUse --install to also install it."
@@ -42,9 +40,15 @@ module RunfileTasks
         say "!txtgrn!Running: !txtpur!#{cmd}"
         system cmd
       end
+
+      endcommand
     end
 
     def publish(gemname, gemdir="gems")
+      gemver = get_gemver gemname
+      
+      command "gem"
+
       help   "Publish gem to rubygems. Make sure to 'run gem build' before you publish."
       action :publish do
         gemfile = "gems/#{gemname}-#{gemver}.gem"
@@ -64,6 +68,12 @@ module RunfileTasks
       end
       
       endcommand
+    end
+
+    def get_gemver(gemname)
+      spec = Gem::Specification::load "#{gemname}.gemspec"
+      spec or abort "Error loading #{gemname}.gemspec"
+      gemver = spec.version.to_s
     end
 
   end
