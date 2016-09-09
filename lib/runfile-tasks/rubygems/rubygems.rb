@@ -5,6 +5,11 @@ module RunfileTasks
     extend self
 
     def all(gemname, gemdir="gems")
+      build gemname, gemdir
+      publish gemname, gemdir
+    end
+
+    def build(gemname, gemdir="gems")
       command "gem"
 
       spec = Gem::Specification::load "#{gemname}.gemspec"
@@ -37,7 +42,9 @@ module RunfileTasks
         say "!txtgrn!Running: !txtpur!#{cmd}"
         system cmd
       end
+    end
 
+    def publish(gemname, gemdir="gems")
       help   "Publish gem to rubygems. Make sure to 'run gem build' before you publish."
       action :publish do
         gemfile = "gems/#{gemname}-#{gemver}.gem"

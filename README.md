@@ -148,6 +148,12 @@ RunfileTasks::RubyGems.all 'my-gem'
 
 # Set the folder where gems are copied after they are built (default)
 RunfileTasks::RubyGems.all 'my-gem', 'gems'
+
+# Include only the `build` and `install` tasks
+RunfileTasks::RubyGems.build 'my-gem'
+
+# Include only the `publish` and `yank` tasks
+RunfileTasks::RubyGems.publish 'my-gem'
 ```
 
 
