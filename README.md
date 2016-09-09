@@ -25,7 +25,7 @@ require 'runfile-tasks/testing'
 ```
 
 
-Requiring the task packs does not make the available in your Runfile 
+Requiring the task packs does not make them available in your Runfile 
 immediately. You need to activate any of the tasks you want as described 
 below.
 
