@@ -12,7 +12,7 @@ module RunfileTasks
       }.merge opts
 
       usage  "#{opts[:action]} [<name>] [<tag>]"
-      help   "Run all specs or a single spec file matching a regex. You can provide a tag to run only specific tests. If you wish to provide a tag only, without a file pattern, simply prefix the tag with a colon (like 'run spec :focus')"
+      help   "Run all specs or a single spec file matching a regex. You can provide a tag to run only specific tests. If you wish to provide a tag only, without a file pattern, simply prefix the tag with a colon, like 'run spec :focus'"
       action opts[:action].to_sym do |args|
         file = args['<name>'] 
         tag  = args['<tag>'] 

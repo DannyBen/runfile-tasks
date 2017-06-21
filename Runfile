@@ -1,7 +1,7 @@
 require "yaml"
 require "runfile-tasks"
 
-name    "Runfile Tasks Runfile"
+title   "Runfile Tasks Runfile"
 summary "Runfile tasks for gem developers"
 version RunfileTasks::VERSION
 

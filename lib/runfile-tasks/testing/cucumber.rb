@@ -3,21 +3,15 @@ module RunfileTasks
     extend self
 
     def cucumber
-      usage  "(feature|features) [<tag_or_file>]"
+      usage  "(feature|features) [<tag_or_file> --list]"
       help   "Run cucumber feature tests. Optionally, specify a tag or a filename to run. Tags should be prefixed with @."
+      option "--list", "Show list of available features"
       action :feature, :features do |args|
-        cmd = "cucumber"
-        single = args['<tag_or_file>']
-        if single
-          if single[0] == '@' 
-            say "!txtgrn!Running features tagged #{single}"
-            cmd = "#{cmd} --tags #{single}"
-          else
-            say "!txtgrn!Running #{single} features"
-            cmd = "#{cmd} 'features/#{single}.feature'"
-          end
+        if args['--list']
+          show_cucumber_features
+        else
+          run_cucumber_features args['<tag_or_file>']
         end
-        exec cmd
       end
     end
 
@@ -52,8 +46,28 @@ module RunfileTasks
         File.write filename, doc
         say "Generated #{filename}"  
       end
-
     end
-  
+
+    def show_cucumber_features
+      say "!txtgrn!Available Features:"
+      Dir['features/**/*.feature'].each do |file|
+        say "- " + File.basename("#{file}", '.feature')
+      end
+    end
+
+    def run_cucumber_features(tag_or_file)
+      cmd = "cucumber"
+      if tag_or_file
+        if tag_or_file[0] == '@' 
+          say "!txtgrn!Running features tagged #{tag_or_file}"
+          cmd = "#{cmd} --tags #{tag_or_file}"
+        else
+          say "!txtgrn!Running #{tag_or_file} features"
+          cmd = "#{cmd} 'features/#{tag_or_file}.feature'"
+        end
+      end
+      exec cmd
+    end
+
   end
 end
