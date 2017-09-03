@@ -112,8 +112,8 @@ RunfileTasks::Testing.minitest './test/*_test.rb'
 
 Commands Added:
 
-- `(feature|features) [<tag_or_file> --list]` - Run cucumber feature tests
-  or show list of available features.
+- `(feature|features) [<tag_or_file> --list --fast]` - Run cucumber feature 
+  tests or show list of available features.
 - `stepdefs` - Generate a markdown document from the step definitions
 
 ```ruby
