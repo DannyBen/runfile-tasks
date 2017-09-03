@@ -3,14 +3,15 @@ module RunfileTasks
     extend self
 
     def cucumber
-      usage  "(feature|features) [<tag_or_file> --list]"
+      usage  "(feature|features) [<tag_or_file> --list --fast]"
       help   "Run cucumber feature tests. Optionally, specify a tag or a filename to run. Tags should be prefixed with @."
       option "--list", "Show list of available features"
+      option "--fast", "Abort on first failure"
       action :feature, :features do |args|
         if args['--list']
           show_cucumber_features
         else
-          run_cucumber_features args['<tag_or_file>']
+          run_cucumber_features args['<tag_or_file>'], args['--fast']
         end
       end
     end
@@ -55,7 +56,7 @@ module RunfileTasks
       end
     end
 
-    def run_cucumber_features(tag_or_file)
+    def run_cucumber_features(tag_or_file, fast=false)
       cmd = "cucumber"
       if tag_or_file
         if tag_or_file[0] == '@' 
@@ -66,6 +67,7 @@ module RunfileTasks
           cmd = "#{cmd} 'features/#{tag_or_file}.feature'"
         end
       end
+      cmd = "#{cmd} --fail-fast" if fast
       exec cmd
     end
 
