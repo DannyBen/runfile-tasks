@@ -73,7 +73,7 @@ module RunfileTasks
     def get_gemver(gemname)
       spec = Gem::Specification::load "#{gemname}.gemspec"
       spec or abort "Error loading #{gemname}.gemspec"
-      gemver = spec.version.to_s
+      spec.version.to_s
     end
 
   end
