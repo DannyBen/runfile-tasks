@@ -10,10 +10,10 @@ module RunfileTasks
     def rdoc(files=nil, options=@@default_rdoc_options)
       files or files = Dir['**/*.{rb,md}']
       files = "'" + files.join("' '") + "'"
-      usage  "rdoc [-- <options>...]"
+      usage  "rdoc [-- OPTIONS...]"
       help   "Generate documentation using the rdoc command line tool. To pass arguments to rdoc, place them after '--'."
       action :rdoc do |args|
-        inopts = args['<options>']
+        inopts = args['OPTIONS']
         options = inopts unless inopts.empty?
         options = options.join(' ')
         cmd = "rdoc #{options} #{files}"

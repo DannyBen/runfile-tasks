@@ -11,11 +11,11 @@ module RunfileTasks
         command: 'rspec'
       }.merge opts
 
-      usage  "#{opts[:action]} [<name>] [<tag>]"
+      usage  "#{opts[:action]} [NAME] [TAG]"
       help   "Run all specs or a single spec file matching a regex. You can provide a tag to run only specific tests. If you wish to provide a tag only, without a file pattern, simply prefix the tag with a colon, like 'run spec :focus'"
       action opts[:action].to_sym do |args|
-        file = args['<name>'] 
-        tag  = args['<tag>'] 
+        file = args['NAME'] 
+        tag  = args['TAG'] 
 
         if file and file[0] == ':'
           tag = file

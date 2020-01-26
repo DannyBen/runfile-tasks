@@ -58,10 +58,10 @@ module RunfileTasks
         system cmd
       end
 
-      usage  "yank [<version>]"
+      usage  "yank [VERSION]"
       help   "Yank gem from rubygems."
       action :yank do |args|
-        ver = args['<version>'] || gemver
+        ver = args['VERSION'] || gemver
         cmd = "gem yank #{gemname} -v #{ver}"
         say "!txtgrn!Running: !txtpur!#{cmd}"
         system cmd

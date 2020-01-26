@@ -3,11 +3,11 @@ module RunfileTasks
     extend self
 
     def minitest(pattern="./test/*_test.rb")
-      usage  "test [<name>]"
+      usage  "test [NAME]"
       help   "Run all tests or a single test file."
       action :test do |args|
-        if args['<name>'] 
-          file = pattern.sub "*", args['<name>']
+        if args['NAME'] 
+          file = pattern.sub "*", args['NAME']
           say "!txtgrn!Using: !txtpur!#{file}"
           require file
         else
