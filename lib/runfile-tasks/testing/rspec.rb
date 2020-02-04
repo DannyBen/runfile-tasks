@@ -37,7 +37,7 @@ module RunfileTasks
         end
         cmd = "#{cmd} --tag #{tag}" if tag
         say "!txtgrn!Running: !txtpur!#{cmd}"
-        system cmd
+        exec cmd
       end
     end
   end
