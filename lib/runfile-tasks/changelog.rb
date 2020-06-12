@@ -11,7 +11,7 @@ module RunfileTasks
         commit = args['--commit'] || args['--push']
 
         run "github_changelog_generator --project #{project} --user #{user}"
-        run "git add CHANGELOG.md && git commit -am 'update changelog'" if commit
+        run "git add CHANGELOG.md && git commit -m changelog CHANGELOG.md" if commit
       end
     end
   end
