@@ -180,6 +180,23 @@ RunfileTasks::Docs.rdoc '**/*.{rb,md}', ["--main README.md", "--all",]
 ```
 
 
+### Changelog  Tasks
+
+This command requires that you have [github_changelog_generator] in your Gemfile.
+
+Commands Added:
+
+- `changelog [--commit]` - Generates a changelog and optionally commits it to the git repository.
+
+
+```ruby
+require 'runfile-tasks/changelog'
+
+# Include the task and provide your github user/repo
+RunfileTasks::Changelog.generator "DannyBen/runfile"
+```
+
 ---
 [Runfile]: https://github.com/DannyBen/runfile
 [random cat]: http://thecatapi.com/api/images/get
+[github_changelog_generator]: https://github.com/github-changelog-generator/github-changelog-generator
