@@ -1,6 +1,9 @@
+require 'runfile-tasks/refinements'
+
 module RunfileTasks
   module Docs
     extend self
+    using Refinements
 
     @@default_rdoc_options = [
       "--main README.md",
@@ -17,7 +20,7 @@ module RunfileTasks
         options = inopts unless inopts.empty?
         options = options.join(' ')
         cmd = "rdoc #{options} #{files}"
-        say "!txtgrn!Running: !txtpur!#{cmd}"
+        puts "g`Running:` p`#{cmd}`".in_color
         system cmd
       end
     end

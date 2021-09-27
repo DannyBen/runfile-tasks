@@ -1,6 +1,9 @@
+require 'runfile-tasks/refinements'
+
 module RunfileTasks
   module Testing
     extend self
+    using Refinements
 
     def rspec(opts={})
       opts = { action: opts } if opts.is_a? String
@@ -36,7 +39,7 @@ module RunfileTasks
           cmd = "#{opts[:command]}"
         end
         cmd = "#{cmd} --tag #{tag}" if tag
-        say "!txtgrn!Running: !txtpur!#{cmd}"
+        puts "g`Running:` p`#{cmd}`".in_color
         exec cmd
       end
     end

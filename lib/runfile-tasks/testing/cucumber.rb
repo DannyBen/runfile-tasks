@@ -1,6 +1,9 @@
+require 'runfile-tasks/refinements'
+
 module RunfileTasks
   module Testing
     extend self
+    using Refinements
 
     def cucumber
       usage  "(feature|features) [TAG_OR_FILE --list --fast]"
@@ -45,14 +48,14 @@ module RunfileTasks
         end
         doc = doc.join "\n"
         File.write filename, doc
-        say "Generated #{filename}"  
+        puts "Generated #{filename}"
       end
     end
 
     def show_cucumber_features
-      say "!txtgrn!Available Features:"
+      puts "g`Available Features:`".in_color
       Dir['features/**/*.feature'].each do |file|
-        say "- " + File.basename("#{file}", '.feature')
+        puts "- " + File.basename("#{file}", '.feature')
       end
     end
 
@@ -60,10 +63,10 @@ module RunfileTasks
       cmd = "cucumber"
       if tag_or_file
         if tag_or_file[0] == '@' 
-          say "!txtgrn!Running features tagged #{tag_or_file}"
+          puts "g`Running features tagged #{tag_or_file}`".in_color
           cmd = "#{cmd} --tags #{tag_or_file}"
         else
-          say "!txtgrn!Running #{tag_or_file} features"
+          puts "g`Running #{tag_or_file} features`".in_color
           cmd = "#{cmd} 'features/#{tag_or_file}.feature'"
         end
       end

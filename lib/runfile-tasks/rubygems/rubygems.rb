@@ -1,8 +1,10 @@
 require 'fileutils'
+require 'runfile-tasks/refinements'
 
 module RunfileTasks
   module RubyGems
     extend self
+    using Refinements
 
     def all(gemname, gemdir="gems")
       build gemname, gemdir
@@ -17,11 +19,11 @@ module RunfileTasks
       usage  "build [--install]"
       help   "Build gem from gemspec and move it to '#{gemdir}' folder.\nUse --install to also install it."
       action :build do |args|
-        say "!txtgrn!Building gem"
+        puts "g`Building gem`".in_color
         cmd = "gem build #{gemname}.gemspec"  
-        say "!txtgrn!Running: !txtpur!#{cmd}"
+        puts "g`Running:` p`#{cmd}`".in_color
         system cmd
-        say "!txtgrn!Moving gem file to #{gemdir}"
+        puts "g`Moving gem file to #{gemdir}`".in_color
         files = Dir["*.gem"]
         Dir.exist? gemdir or FileUtils.mkdir gemdir
         files.each {|f| FileUtils.mv f, gemdir }
@@ -37,7 +39,7 @@ module RunfileTasks
           gemfile = "gems/#{gemname}-#{gemver}.gem"
           cmd = "gem install #{gemfile}"
         end
-        say "!txtgrn!Running: !txtpur!#{cmd}"
+        puts "g`Running:` p`#{cmd}`".in_color
         system cmd
       end
 
@@ -54,7 +56,7 @@ module RunfileTasks
         gemfile = "gems/#{gemname}-#{gemver}.gem"
         File.exist? gemfile or abort "File not found #{gemfile}"
         cmd = "gem push #{gemfile}"
-        say "!txtgrn!Running: !txtpur!#{cmd}"
+        puts "g`Running:` p`#{cmd}`".in_color
         system cmd
       end
 
@@ -63,7 +65,7 @@ module RunfileTasks
       action :yank do |args|
         ver = args['VERSION'] || gemver
         cmd = "gem yank #{gemname} -v #{ver}"
-        say "!txtgrn!Running: !txtpur!#{cmd}"
+        puts "g`Running:` p`#{cmd}`".in_color
         system cmd
       end
       

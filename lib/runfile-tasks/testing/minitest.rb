@@ -1,6 +1,9 @@
+require 'runfile-tasks/refinements'
+
 module RunfileTasks
   module Testing
     extend self
+    using Refinements
 
     def minitest(pattern="./test/*_test.rb")
       usage  "test [NAME]"
@@ -8,11 +11,11 @@ module RunfileTasks
       action :test do |args|
         if args['NAME'] 
           file = pattern.sub "*", args['NAME']
-          say "!txtgrn!Using: !txtpur!#{file}"
+          puts "g`Using:` p`#{file}`".in_color
           require file
         else
           Dir[pattern].each do |file| 
-            say "!txtgrn!Using: !txtpur!#{file}"
+            puts "g`Using:` p`#{file}`".in_color
             require file
           end
         end
