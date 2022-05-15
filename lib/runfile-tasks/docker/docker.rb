@@ -35,7 +35,7 @@ module RunfileTasks
           puts "r`FAIL: docker version is #{docker_version}, expected #{image_version}`".in_color
           exit 1
         else
-          puts "g`PASS: docker version is #{docker_version}`"
+          puts "g`PASS: docker version is #{docker_version}`".in_color
         end
       end
 
@@ -49,6 +49,8 @@ module RunfileTasks
       action :push, :p do |args|
         puts "g`Pushing docker image #{image_name}`".in_color
         system "docker push #{image_name}"
+        
+        puts "g`Pushing docker image #{image_name}:#{image_version}`".in_color
         system "docker push #{image_name}:#{image_version}"
       end
 
