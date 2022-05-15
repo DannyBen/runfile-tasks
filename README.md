@@ -1,10 +1,8 @@
-Runfile Tasks
-==================================================
+# Runfile Tasks
 
 A library of tasks ready to be included in your [Runfile]
 
-Install
---------------------------------------------------
+## Install
 
 Install the gem or require it in your Gemfile:
 
@@ -30,9 +28,7 @@ immediately. You need to activate any of the tasks you want as described
 below.
 
 
-Usage
---------------------------------------------------
-
+## Usage
 
 Include any of the tasks you need in your Runfile like this:
 
@@ -55,8 +51,7 @@ end
 ```
 
 
-Task Index
---------------------------------------------------
+## Task Index
 
 ### Testing Tasks
 
@@ -180,7 +175,23 @@ RunfileTasks::Docs.rdoc '**/*.{rb,md}', ["--main README.md", "--all",]
 ```
 
 
-### Changelog  Tasks
+### Docker Tasks
+
+Commands Added:
+
+- `docker build`
+- `docker test`
+- `docker push`
+
+```ruby
+require 'runfile-tasks/docker'
+
+# Provide an image name and version
+RunfileTasks::Docker.all "dannyben/runfile", "0.1.0"
+```
+
+
+### Changelog Tasks
 
 This command requires that you have [github_changelog_generator] in your Gemfile.
 
