@@ -37,7 +37,7 @@ module RunfileTasks
           cmd = "gem install #{gemname}"
         else
           gemfile = "gems/#{gemname}-#{gemver}.gem"
-          cmd = "gem install #{gemfile}"
+          cmd = "gem install --local #{gemfile}"
         end
         puts "g`Running:` p`#{cmd}`".in_color
         system cmd
