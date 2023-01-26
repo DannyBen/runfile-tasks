@@ -4,7 +4,7 @@ summary 'Add docker building and publishing commands to your project'
 require_context :image
 require_context :version
 
-help   "Build the docker image"
+help   'Build the docker image'
 action :build, :b do
   say "g`Building docker image #{image}`"
   run "docker build -t #{image} ."
@@ -12,22 +12,22 @@ action :build, :b do
   run "docker images | grep #{image}"
 end
 
-help   "Run the image with --version and compare it with the provided version"
-action :test, :t do |args|
+help   'Run the image with --version and compare it with the provided version'
+action :test, :t do |_args|
   docker_version = `docker run --rm #{image} --version`.chomp
-  if docker_version != version
+  if docker_version == version
+    say "g`PASS: docker version is #{docker_version}`"
+  else
     say "r`FAIL: docker version is #{docker_version}, expected #{version}`"
     1
-  else
-    say "g`PASS: docker version is #{docker_version}`"
   end
 end
 
-help   "Push the docker image to Docker Hub"
+help   'Push the docker image to Docker Hub'
 action :push, :p do
   say "g`Pushing docker image #{image}`"
   run "docker push #{image}"
-  
+
   say "g`Pushing docker image #{image}:#{version}`"
   run "docker push #{image}:#{version}"
 end
