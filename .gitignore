@@ -1,5 +1,4 @@
-dev
-doc
-gems
+/tmp
+/dev
 *.gem
 Gemfile.lock

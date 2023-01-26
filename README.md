@@ -2,6 +2,15 @@
 
 A library of tasks ready to be included in your [Runfile].
 
+Note that this version of the gem is intended for Runfile version >= 1.0.
+
+If you are using an older version of Runfile, you will also need to lock the 
+runfile-tasks version.
+
+```ruby
+gem 'runfile-tasks', '< 1.0'
+```
+
 ## Install
 
 Manually:
@@ -22,166 +31,13 @@ In your Runfile, use the `import_gem` directive to require any of the runfiles:
 
 ```ruby
 title 'My Runfile'
-import_gem 'runfile-tasks/docker'
-```
 
-## Task Index
+# commands for building and publishing your gem
+import_gem 'runfile-tasks/gem', gemname: 'my-gem'
 
-### Testing Tasks
-
-Require all testing tasks:
-
-```ruby
-require 'runfile-tasks/testing'
-```
-
-#### Testing with RSpec
-
-Commands Added:
-
-- `run spec [NAME] [TAG]` - Run all specs, a single spec file, or all specs 
-  matching a tag.
-
-```ruby
-# Only require the rspec tasks
-require 'runfile-tasks/testing/rspec'
-
-# Include the rspec tasks with default configuration
-RunfileTasks::Testing.rspec
-
-# Set the Runfile action to 'test' instead of the default 'spec'
-RunfileTasks::Testing.rspec 'test'
-
-# Change the default options with a hash (these are the defaults)
-RunfileTasks::rspec action: 'spec', 
-  pattern: './spec/**/*_spec.rb', command: 'rspec'
-
-```
-
-
-#### Testing with Minitest
-
-Commands Added:
-
-- `test [NAME]` - Run all tests or a single test file.
-
-```ruby
-# Only require the minitest tasks
-require 'runfile-tasks/testing/minitest'
-
-# Include the minitest tasks with default configuration
-RunfileTasks::Testing.minitest
-
-# Set the file pattern to look for (this is the default)
-RunfileTasks::Testing.minitest './test/*_test.rb'
-
-```
-
-#### Testing with Cucumber
-
-Commands Added:
-
-- `(feature|features) [<tag_or_file> --list --fast]` - Run cucumber feature 
-  tests or show list of available features.
-- `stepdefs` - Generate a markdown document from the step definitions
-
-```ruby
-# Only require the cucumber tasks
-require 'runfile-tasks/testing/cucumber'
-
-# Include the cucumber tasks with default configuration
-RunfileTasks::Testing.cucumber
-
-# Include the step definitions markdown generator
-RunfileTasks::Testing.cucumber_stepdefs
-```
-
-
-### Gem Authoring Tasks
-
-Commands Added:
-
-- `build [--install]` - Build gem from gemspec and move it to 'gems' folder. 
-   Use --install to also install it.
-- `install [--remote]` - Install gem from local gem file or from rubygems 
-   (--remote).
-- `publish` - Publish gem to rubygems. Make sure to 'run gem build' before 
-   you publish.
-- `yank [VERSION]` - Yank gem from rubygems.
-
-
-```ruby
-require 'runfile-tasks/rubygems'
-
-# Include the tasks with default configuration. Pass in your gem name.
-RunfileTasks::RubyGems.all 'my-gem'
-
-# Set the folder where gems are copied after they are built (default)
-RunfileTasks::RubyGems.all 'my-gem', 'gems'
-
-# Include only the `build` and `install` tasks
-RunfileTasks::RubyGems.build 'my-gem'
-
-# Include only the `publish` and `yank` tasks
-RunfileTasks::RubyGems.publish 'my-gem'
-```
-
-
-### Documentation Tasks
-
-Commands Added:
-
-- `rdoc [-- OPTIONS...]` - Generate documentation using the rdoc command 
-  line tool. To pass arguments to rdoc, place them after '--'.
-
-
-```ruby
-require 'runfile-tasks/docs'
-
-# Include the tasks with default configuration.
-RunfileTasks::Docs.rdoc
-
-# Set the files to be considered (default below)
-RunfileTasks::Docs.rdoc '**/*.{rb,md}'
-
-# Pass any additional option directly to rdoc (defaults below)
-RunfileTasks::Docs.rdoc '**/*.{rb,md}', ["--main README.md", "--all",]
-```
-
-
-### Docker Tasks
-
-Commands Added:
-
-- `docker build`
-- `docker test`
-- `docker push`
-
-```ruby
-require 'runfile-tasks/docker'
-
-# Provide an image name and version
-RunfileTasks::Docker.all "dannyben/runfile", "0.1.0"
-```
-
-
-### Changelog Tasks
-
-This command requires that you have [github_changelog_generator] in your Gemfile.
-
-Commands Added:
-
-- `changelog [--commit]` - Generates a changelog and optionally commits it to the git repository.
-
-
-```ruby
-require 'runfile-tasks/changelog'
-
-# Include the task and provide your github user/repo
-RunfileTasks::Changelog.generator "DannyBen/runfile"
+# commands for building and publishing your Dockerfile
+import_gem 'runfile-tasks/docker', image: 'my/image', version: '1.2.3'
 ```
 
 ---
 [Runfile]: https://github.com/DannyBen/runfile
-[random cat]: http://thecatapi.com/api/images/get
-[github_changelog_generator]: https://github.com/github-changelog-generator/github-changelog-generator

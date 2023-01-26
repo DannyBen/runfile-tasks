@@ -1,59 +1,65 @@
 require 'fileutils'
 
+title 'Gem management commands'
+summary 'Add gem building and publishing to your gem project'
+
+require_context :gemname
+
 help   'Build and optionally install the gem'
 usage  '(build | b) [--install]'
 option '--install, -i', 'Install after building'
 action :build, :b do |args|
-  cmd = "gem build #{gemname}.gemspec --output #{gemfile}"
-  say "g`Building gem`"
-  say "$ m`#{cmd}`"
-  FileUtils.mkdir_p 'tmp'
-  system cmd
-
-  execute 'gem install' if args['--install']
+  say "g`Building #{gemname}`"
+  run "gem build #{gemname}.gemspec --output #{gemfile}"
+  install_gem if args['--install']
 end
 
 help   'Install the last built gem'
-action :install, :i do |_args|
-  cmd = "gem install --local #{gemfile}"
-  say "g`Installing gem`"
-  say "$ m`#{cmd}`"
-  system cmd
+action :install, :i do
+  need_gemfile
+  install_gem
 end
 
 help   'Publish gem to rubygems'
 action :publish, :p do
-  raise UserError, "File not found #{gemfile}" unless File.exist? gemfile
-
-  cmd = "gem push #{gemfile}"
+  need_gemfile
   say "g`Publishing gem`"
-  say "$ m`#{cmd}`"
-  # system cmd
+  run "gem push #{gemfile}"
 end
 
 usage  'yank VERSION'
 help   'Yank gem from rubygems'
 action :yank do |args|
   version = args['VERSION']
-  cmd = "gem yank #{gemname} -v #{version}"
-  say "rib` Yanking gem `"
-  say "$ m`#{cmd}`"
+  say "rib` Yanking gem ` Are you sure?"
   10.downto(0) do |i|
-    say "executing in #{i} seconds - Ctrl-C to abort  ", replace: true
+    say "Yanking in #{i} seconds - Ctrl-C to abort  ", replace: true
     sleep 1
   end
   say 'g`Yanking gem`', replace: true
-  system cmd
+  run "gem yank #{gemname} -v #{version}"
 end
 
-def gemname
-  @gemname ||= begin
-    raise UserError, 'Please provide a name in your nu`import_gem` call' unless context[:name]
-
-    context[:name]
+helpers do
+  def gemname
+    context[:gemname]
   end
-end
 
-def gemfile
-  "tmp/#{gemname}.gem"
+  def gemfile
+    "/tmp/#{gemname}.gem"
+  end
+
+  def run(cmd)
+    say "$ m`#{cmd}`"
+    system cmd unless ENV['DRY_RUN']
+  end
+
+  def install_gem
+    say "g`Installing #{gemname}`"
+    run "gem install --local #{gemfile}"
+  end
+
+  def need_gemfile
+    raise UserError, "File not found #{gemfile}" unless File.exist? gemfile
+  end
 end

@@ -1,0 +1,48 @@
+title 'Docker image commands'
+summary 'Add docker building and publishing commands to your project'
+
+require_context :image
+require_context :version
+
+help   "Build the docker image"
+action :build, :b do
+  say "g`Building docker image #{image}`"
+  run "docker build -t #{image} ."
+  run "docker tag #{image} #{image}:#{version}"
+  run "docker images | grep #{image}"
+end
+
+help   "Run the image with --version and compare it with the provided version"
+action :test, :t do |args|
+  docker_version = `docker run --rm #{image} --version`.chomp
+  if docker_version != version
+    say "r`FAIL: docker version is #{docker_version}, expected #{version}`"
+    1
+  else
+    say "g`PASS: docker version is #{docker_version}`"
+  end
+end
+
+help   "Push the docker image to Docker Hub"
+action :push, :p do
+  say "g`Pushing docker image #{image}`"
+  run "docker push #{image}"
+  
+  say "g`Pushing docker image #{image}:#{version}`"
+  run "docker push #{image}:#{version}"
+end
+
+helpers do
+  def image
+    context[:image]
+  end
+
+  def version
+    context[:version]
+  end
+
+  def run(cmd)
+    say "$ m`#{cmd}`"
+    system cmd unless ENV['DRY_RUN']
+  end
+end

@@ -1,1 +1,0 @@
-require 'runfile-tasks/docs/all'
