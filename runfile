@@ -1,8 +1,4 @@
-require 'yaml'
-require 'byebug'
-require 'runfile-tasks'
-
 title   'Runfile Tasks Runfile'
-version RunfileTasks::VERSION
+
 import 'gem', gemname: 'runfile-tasks'
 import 'docker', image: 'bash', version: '1.2.3'

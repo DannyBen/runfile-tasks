@@ -1,10 +1,9 @@
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'runfile-tasks/version'
 
 Gem::Specification.new do |s|
   s.name        = 'runfile-tasks'
-  s.version     = RunfileTasks::VERSION
+  s.version     = '1.0.0.rc1'
   s.summary     = 'Runfile tasks collection'
   s.description = 'A collection of tasks for Runfile'
   s.authors     = ['Danny Ben Shitrit']
