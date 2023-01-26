@@ -31,7 +31,7 @@ usage  'yank VERSION'
 help   'Yank gem from rubygems'
 action :yank do |args|
   version = args['VERSION']
-  say 'rib` Yanking gem ` Are you sure?'
+  say "rib` Yank #{gemname} #{version} ` Are you sure?"
   10.downto(0) do |i|
     say "Yanking in #{i} seconds - Ctrl-C to abort  ", replace: true
     sleep 1
