@@ -1,55 +1,29 @@
 # Runfile Tasks
 
-A library of tasks ready to be included in your [Runfile]
+A library of tasks ready to be included in your [Runfile].
 
 ## Install
 
-Install the gem or require it in your Gemfile:
+Manually:
+
+```shell
+$ gem install runfile-tasks
+```
+
+With bundler:
 
 ```ruby
 gem 'runfile-tasks'
 ```
 
-In your Runfile, you can include either all tasks:
-
-```ruby
-require 'runfile-tasks'
-```
-
-Or pick and choose from the various task categories:
-
-```ruby
-require 'runfile-tasks/testing'
-```
-
-
-Requiring the task packs does not make them available in your Runfile 
-immediately. You need to activate any of the tasks you want as described 
-below.
-
-
 ## Usage
 
-Include any of the tasks you need in your Runfile like this:
+In your Runfile, use the `import_gem` directive to require any of the runfiles:
 
 ```ruby
-require 'runfile-tasks'
-
-name    "Greeter"
-summary "A sample Runfile"
-version "0.1.0"
-
-# Include rdoc tasks and rspec tasks
-RunfileTasks::Docs.rdoc
-RunfileTasks::Testing.rspec
-
-# The rest of your Runfile goes here
-action :hello do
-  puts "world"
-end
-
+title 'My Runfile'
+import_gem 'runfile-tasks/docker'
 ```
-
 
 ## Task Index
 
