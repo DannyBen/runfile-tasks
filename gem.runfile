@@ -1,7 +1,7 @@
 require 'fileutils'
 
 title 'Gem management commands'
-summary 'Add gem building and publishing to your gem project'
+summary 'Gem building and publishing commands'
 
 require_context :gemname
 
