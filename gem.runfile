@@ -4,6 +4,7 @@ title 'Gem management commands'
 summary 'Gem building and publishing commands'
 
 require_context :gemname
+require_context :private, default: false
 
 help   'Build and optionally install the gem'
 usage  '(build | b) [--install]'
@@ -20,24 +21,26 @@ action :install, :i do
   install_gem
 end
 
-help   'Publish gem to rubygems'
-action :publish, :p do
-  need_gemfile
-  say 'g`Publishing gem`'
-  run "gem push #{gemfile}"
-end
-
-usage  'yank VERSION'
-help   'Yank gem from rubygems'
-action :yank do |args|
-  version = args['VERSION']
-  say "rib` Yank #{gemname} #{version} ` Are you sure?"
-  10.downto(0) do |i|
-    say "Yanking in #{i} seconds - Ctrl-C to abort  ", replace: true
-    sleep 1
+unless context[:private]
+  help   'Publish gem to rubygems'
+  action :publish, :p do
+    need_gemfile
+    say 'g`Publishing gem`'
+    run "gem push #{gemfile}"
   end
-  say 'g`Yanking gem`', replace: true
-  run "gem yank #{gemname} -v #{version}"
+
+  usage  'yank VERSION'
+  help   'Yank gem from rubygems'
+  action :yank do |args|
+    version = args['VERSION']
+    say "rib` Yank #{gemname} #{version} ` Are you sure?"
+    10.downto(0) do |i|
+      say "Yanking in #{i} seconds - Ctrl-C to abort  ", replace: true
+      sleep 1
+    end
+    say 'g`Yanking gem`', replace: true
+    run "gem yank #{gemname} -v #{version}"
+  end
 end
 
 helpers do
