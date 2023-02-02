@@ -3,7 +3,6 @@ require 'fileutils'
 title 'Gem management commands'
 summary 'Gem building and publishing commands'
 
-require_context :gemname
 require_context :private, default: false
 
 help   'Build and optionally install the gem'
@@ -45,7 +44,12 @@ end
 
 helpers do
   def gemname
-    context[:gemname]
+    @gemname ||= begin
+      gemspec = Dir['*.gemspec'].first
+      raise UserError, 'Cannot find any *.gemspec' unless gemspec
+
+      Gem::Specification::load(gemspec).name
+    end
   end
 
   def gemfile
