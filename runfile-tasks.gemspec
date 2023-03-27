@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |s|
   s.name        = 'runfile-tasks'
-  s.version     = '1.0.1'
+  s.version     = '1.0.2'
   s.summary     = 'Runfile tasks collection'
   s.description = 'A collection of tasks for Runfile'
   s.authors     = ['Danny Ben Shitrit']
