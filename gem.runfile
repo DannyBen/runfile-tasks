@@ -1,7 +1,6 @@
 require 'fileutils'
 
-title 'Gem management commands'
-summary 'Gem building and publishing commands'
+summary 'Gem management commands'
 
 require_context :private, default: false
 

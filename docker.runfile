@@ -1,5 +1,4 @@
-title 'Docker image commands'
-summary 'Ddocker building and publishing commands'
+summary 'Ddocker management commands'
 
 require_context :image
 require_context :version
