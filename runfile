@@ -1,3 +1,4 @@
+require 'debug'
 title   'Runfile Tasks Runfile'
 
 import 'gem', gemname: 'runfile-tasks'

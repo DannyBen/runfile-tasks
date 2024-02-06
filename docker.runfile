@@ -8,11 +8,11 @@ action :build, :b do
   say "g`Building docker image #{image}`"
   run "docker build -t #{image} ."
   run "docker tag #{image} #{image}:#{version}"
-  run "docker images | grep #{image}"
+  run "docker images |grep #{image}"
 end
 
 help   'Run the image with --version and compare it with the provided version'
-action :test, :t do |_args|
+action :test, :t do
   docker_version = `docker run --rm #{image} --version`.chomp
   if docker_version == version
     say "g`PASS: docker version is #{docker_version}`"
@@ -29,6 +29,21 @@ action :push, :p do
 
   say "g`Pushing docker image #{image}:#{version}`"
   run "docker push #{image}:#{version}"
+end
+
+help   'Build the image for multiple platforms and push'
+usage  '(multi | m) [PLATFORMS...]'
+param  'PLATFORMS', 'List of platforms [default: linux/amd64 linux/arm64v8]'
+action :multi, :m do |args|
+  platforms = args['PLATFORMS']
+  platforms = %w[linux/amd64 linux/arm64v8] if platforms.empty?
+
+  say "g`Building and pushing docker image #{image}`"
+  say "g`Platforms: #{platforms}`"
+  run "docker buildx build --push --platform #{platforms.join ','} -t #{image} -t #{image}:#{version} ."
+
+  say "g`Inspecting platforms for #{image}`"
+  run "docker buildx imagetools inspect #{image}:#{version} |grep Platform"
 end
 
 helpers do
