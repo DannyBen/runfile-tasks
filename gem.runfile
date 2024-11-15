@@ -6,7 +6,7 @@ require_context :private, default: false
 
 help   'Build the gem to the current directory'
 usage  '(build | b)'
-action :build, :b do |args|
+action :build, :b do |_args|
   build_gem
   system %W[cp #{gemfile} .]
 end
@@ -45,7 +45,7 @@ helpers do
       gemspec = Dir['*.gemspec'].first
       raise UserError, 'Cannot find any *.gemspec' unless gemspec
 
-      Gem::Specification::load(gemspec).name
+      Gem::Specification.load(gemspec).name
     end
   end
 
