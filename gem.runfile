@@ -5,9 +5,14 @@ summary 'Gem management commands'
 require_context :private, default: false
 
 help   'Build the gem'
-usage  '(build | b)'
-action :build, :b do |_args|
+usage  '(build | b) [--copy]'
+option '--copy, -c', 'Copy the resulting file to the current directory'
+action :build, :b do |args|
   build_gem
+  if args['--copy']
+    say "g`Copying #{gemfile} to current directory`"
+    run "cp #{gemfile} ."
+  end
 end
 
 help   'Build and install the gem'
