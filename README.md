@@ -2,15 +2,6 @@
 
 A library of tasks ready to be included in your [Runfile].
 
-Note that this version of the gem is intended for Runfile version >= 1.0.
-
-If you are using an older version of Runfile, you will also need to lock the 
-runfile-tasks version.
-
-```ruby
-gem 'runfile-tasks', '< 1.0'
-```
-
 ## Install
 
 Manually:
