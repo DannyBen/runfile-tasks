@@ -4,18 +4,16 @@ summary 'Gem management commands'
 
 require_context :private, default: false
 
-help   'Build and optionally install the gem'
-usage  '(build | b) [--install]'
-option '--install, -i', 'Install after building'
+help   'Build the gem to the current directory'
+usage  '(build | b)'
 action :build, :b do |args|
-  say "g`Building #{gemname}`"
-  run "gem build #{gemname}.gemspec --output #{gemfile}"
-  install_gem if args['--install']
+  build_gem
+  system %W[cp #{gemfile} .]
 end
 
-help   'Install the last built gem'
+help   'Build and install the gem'
 action :install, :i do
-  need_gemfile
+  build_gem
   install_gem
 end
 
@@ -63,6 +61,11 @@ helpers do
   def install_gem
     say "g`Installing #{gemname}`"
     run "gem install --local #{gemfile}"
+  end
+
+  def build_gem
+    say "g`Building #{gemname}`"
+    run "gem build #{gemname}.gemspec --output #{gemfile}"
   end
 
   def need_gemfile
