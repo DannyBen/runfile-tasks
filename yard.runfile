@@ -1,8 +1,8 @@
 summary 'YARD documentation commands'
 
-help   "Run YARD server"
-usage  "server [--port PORT]"
-option "--port, -p PORT", "Set server port [default: 3000]"
+help   'Run YARD server'
+usage  'server [--port PORT]'
+option '--port, -p PORT', 'Set server port [default: 3000]'
 action :server do |args|
   system "yard server --server puma --port #{args['--port']} --bind 0.0.0.0 --reload"
 end
