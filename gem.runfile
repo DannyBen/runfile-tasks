@@ -4,11 +4,10 @@ summary 'Gem management commands'
 
 require_context :private, default: false
 
-help   'Build the gem to the current directory'
+help   'Build the gem'
 usage  '(build | b)'
 action :build, :b do |_args|
   build_gem
-  system %W[cp #{gemfile} .]
 end
 
 help   'Build and install the gem'
