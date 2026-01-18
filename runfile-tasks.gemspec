@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |s|
   s.name        = 'runfile-tasks'
-  s.version     = '1.0.4'
+  s.version     = '1.1.0'
   s.summary     = 'Runfile tasks collection'
   s.description = 'A collection of tasks for Runfile'
   s.authors     = ['Danny Ben Shitrit']
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.files       = Dir['README.md', '*.runfile']
   s.homepage    = 'https://github.com/DannyBen/runfile-tasks'
   s.license     = 'MIT'
-  s.required_ruby_version = '>= 3.1'
+  s.required_ruby_version = '>= 3.2'
   
   s.metadata = {
     'bug_tracker_uri'       => 'https://github.com/DannyBen/runfile-tasks/issues',
