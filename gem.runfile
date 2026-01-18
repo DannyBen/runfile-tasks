@@ -3,6 +3,7 @@ require 'fileutils'
 summary 'Gem management commands'
 
 require_context :private, default: false
+require_context :github_package_user, default: false
 
 help   'Build the gem'
 usage  '(build | b) [--copy]'
@@ -21,7 +22,15 @@ action :install, :i do
   install_gem
 end
 
-unless context[:private]
+if context[:github_package_user]
+  help   'Publish gem to Github'
+  action :publish, :p do
+    need_gemfile
+    say 'g`Publishing gem`'
+    run "gem push --key github --host https://rubygems.pkg.github.com/#{context[:github_package_user]} #{gemfile}"
+  end
+
+elsif !context[:private]
   help   'Publish gem to rubygems'
   action :publish, :p do
     need_gemfile

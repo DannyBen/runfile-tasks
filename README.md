@@ -27,6 +27,8 @@ title 'My Runfile'
 import_gem 'runfile-tasks/gem'
 # or without publish/yank actions
 import_gem 'runfile-tasks/gem', private: true
+# or with publishing to github packages
+import_gem 'runfile-tasks/gem', github_package_user: 'your-user-or-org'
 
 # commands for building and publishing your Dockerfile
 import_gem 'runfile-tasks/docker', image: 'my/image', version: '1.2.3'
