@@ -1,5 +1,7 @@
 # Runfile Tasks
 
+![repocard](https://repocard.dannyben.com/svg/runfile-tasks.svg)
+
 A library of tasks ready to be included in your [Runfile].
 
 ## Install
